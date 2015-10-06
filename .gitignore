@@ -1,8 +1,12 @@
 # venv
+pip-selfcheck.json
 pyvenv.cfg
 bin/
 include/
 lib/
+
+# PyCharm
+.idea/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
