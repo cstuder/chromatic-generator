@@ -29,7 +29,7 @@ if not os.path.isdir(outputdir):
 elif not args.force:
     raise FileExistsError('Target directory already exists. Use --force to overwrite.')
 
-dirs = ['/images', 'thumbnails', '/chromatic']
+dirs = ['/images', '/thumbnails', '/chromatic']
 
 for dir in dirs:
     if not os.path.isdir(outputdir + dir):
