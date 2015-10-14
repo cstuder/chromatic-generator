@@ -16,9 +16,22 @@ Hosted version: http://www.chromatic.io
 ## Top level usage
 
 1. Collect your images in a directory.
-2. Use `chromatic-generator` to copy the images, create thumbnails and the gallery files.
+2. Use `chromatic-generator.py` to copy the images, create thumbnails and the gallery files.
 3. Open the created index.html in a browser and see your image arranged and displayed in an awesomely beautiful kind of way.
 
 ## Usage of the command line tool
 
-TODO.
+    python chromatic-generator.py [-h] [-f] [-tw THUMBWIDTH] [-th THUMBHEIGHT]
+                              inputdir outputdir
+
+    positional arguments:
+      inputdir              Source directory with the images
+      outputdir             Target directory for the gallery files
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -f, --force           Overwrite files in target directory
+      -tw THUMBWIDTH, --thumbwidth THUMBWIDTH
+                            Maximum width of the thumbnails (Defaults to 600 pixels)
+      -th THUMBHEIGHT, --thumbheight THUMBHEIGHT
+                            Maximum height of the thumbnails (Defaults to 600 pixels)

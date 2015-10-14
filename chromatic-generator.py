@@ -1,5 +1,5 @@
 # chromatic-generator.py
-import glob, os, argparse, shutil
+import glob, os, argparse, shutil, json
 from PIL import Image
 
 # Decode command line arguments
@@ -19,17 +19,21 @@ inputdir = os.path.abspath(args.inputdir)
 outputdir = os.path.abspath(args.outputdir)
 
 if inputdir == outputdir:
-    raise ValueError('Source and target directory cannot be identical')
+    raise ValueError('Source and target directory cannot be identical.')
 
 thumbnailsize = args.thumbwidth, args.thumbheight
 
 # Prepare target directories
 if not os.path.isdir(outputdir):
     os.makedirs(outputdir)
+elif not args.force:
+    raise FileExistsError('Target directory already exists. Use --force to overwrite.')
 
-os.makedirs(outputdir + '/images')
-os.makedirs(outputdir + '/thumbnails')
-os.makedirs(outputdir + '/chromatic')
+dirs = ['/images', 'thumbnails', '/chromatic']
+
+for dir in dirs:
+    if not os.path.isdir(outputdir + dir):
+        os.makedirs(outputdir + dir)
 
 # Prepare gallery files
 chromaticdir = os.path.dirname(os.path.abspath(__file__)) + '/chromatic.js'
@@ -38,6 +42,7 @@ shutil.copy2(chromaticdir + '/lib/jquery-2.1.1.min.js', outputdir + '/chromatic/
 shutil.copy2(chromaticdir + '/stylesheets/chromatic.css', outputdir + '/chromatic/chromatic.css')
 
 # Find all images
+photoList = []
 sourceImages = glob.glob(inputdir + '/*.jpg')
 
 for sourceImage in sourceImages:
@@ -47,12 +52,22 @@ for sourceImage in sourceImages:
     shutil.copy2(sourceImage, outputdir + '/images/' + filename)
 
     # Create thumbnails
-
-    # TODO
+    image = Image.open(sourceImage)
+    aspectRatio = image.width / image.height
+    image.thumbnail(thumbnailsize)
+    image.save(outputdir + '/thumbnails/' + filename)
+    image.close()
 
     # Store information and aspect ratio
+    photoList.append({
+        'big': 'images/' + filename,
+        'small': 'thumbnails/' + filename,
+        'aspect_ratio': aspectRatio
+    })
 
 # Create index.html
+with open(os.path.dirname(os.path.abspath(__file__)) + '/templates/index.html', 'r') as indexFile:
+    index = indexFile.read()
 
-# TODO
-
+with open(outputdir + '/index.html', 'w') as newIndexFile:
+    newIndexFile.write(index.replace('CHROMATICGALLERYDEFINITION', json.dumps(photoList), 1))
