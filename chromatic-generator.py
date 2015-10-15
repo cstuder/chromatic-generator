@@ -59,7 +59,12 @@ for sourceImage in sourceImages:
     image.save(outputdir + '/thumbnails/' + filename)
     image.close()
 
+    # TODO Create blur file (If this is the reason the gallery is slow...)
+
     # Store information and aspect ratio
+
+    # TODO Extract creation date from EXIF (otherwise take file creation date), sort by creation date
+
     photoList.append({
         'big': 'images/' + filename,
         'small': 'thumbnails/' + filename,
