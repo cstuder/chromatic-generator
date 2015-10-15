@@ -36,10 +36,11 @@ for dir in dirs:
         os.makedirs(outputdir + dir)
 
 # Prepare gallery files
+files = ['/dist/chromatic.js', '/lib/jquery-2.1.1.min.js', '/stylesheets/chromatic.css']
 chromaticdir = os.path.dirname(os.path.abspath(__file__)) + '/chromatic.js'
-shutil.copy2(chromaticdir + '/dist/chromatic.js', outputdir + '/chromatic/chromatic.js')
-shutil.copy2(chromaticdir + '/lib/jquery-2.1.1.min.js', outputdir + '/chromatic/jquery.js')
-shutil.copy2(chromaticdir + '/stylesheets/chromatic.css', outputdir + '/chromatic/chromatic.css')
+
+for file in files:
+    shutil.copy2(chromaticdir + file, outputdir + '/chromatic/' + os.path.basename(file))
 
 # Find all images
 photoList = []
