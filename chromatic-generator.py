@@ -1,5 +1,5 @@
 # chromatic-generator.py
-import glob, os, argparse, shutil, json
+import glob, os, argparse, shutil, json, exifread, datetime
 from PIL import Image
 
 # Decode command line arguments
@@ -59,21 +59,29 @@ for sourceImage in sourceImages:
     image.save(outputdir + '/thumbnails/' + filename)
     image.close()
 
-    # TODO Create blur file (If this is the reason the gallery is slow...)
+    # Determine date
+    date = os.path.getctime(sourceImage)
+
+    file = open(sourceImage, 'rb')
+    tags = exifread.process_file(file, details=False, stop_tag='DateTimeOriginal')
+    if 'EXIF DateTimeOriginal' in tags:
+        date = datetime.datetime.strptime(str(tags['EXIF DateTimeOriginal']), '%Y:%m:%d %H:%M:%S').timestamp()
 
     # Store information and aspect ratio
-
-    # TODO Extract creation date from EXIF (otherwise take file creation date), sort by creation date
 
     photoList.append({
         'big': 'images/' + filename,
         'small': 'thumbnails/' + filename,
-        'aspect_ratio': aspectRatio
+        'aspect_ratio': aspectRatio,
+        'date': date
     })
+
+# Sort photo list by date
+chronologicalList = sorted(photoList, key=lambda k: k['date'])
 
 # Create index.html
 with open(os.path.dirname(os.path.abspath(__file__)) + '/templates/index.html', 'r') as indexFile:
     index = indexFile.read()
 
 with open(outputdir + '/index.html', 'w') as newIndexFile:
-    newIndexFile.write(index.replace('CHROMATICGALLERYDEFINITION', json.dumps(photoList), 1))
+    newIndexFile.write(index.replace('CHROMATICGALLERYDEFINITION', json.dumps(chronologicalList), 1))
