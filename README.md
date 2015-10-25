@@ -35,3 +35,18 @@ Hosted version: http://www.chromatic.io
                             Maximum width of the thumbnails (Defaults to 600 pixels)
       -th THUMBHEIGHT, --thumbheight THUMBHEIGHT
                             Maximum height of the thumbnails (Defaults to 600 pixels)
+
+## Status of chromatic-generator
+
+It is Good Enough for my purposes: Creating a gallery from a collection of JPEG files with correct EXIF information.
+
+There will be no more development on my part. (Christian Studer, end of october 2015)
+
+### Possible improvements for the future
+
+- Other sort orders
+- Handling more image file types
+- Better error handling
+
+
+
