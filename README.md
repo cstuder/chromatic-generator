@@ -1,7 +1,9 @@
 # chromatic-generator
+Status: Working
+
 A Python 3 command line tool to create beautiful static HTML photo galleries with the help of `chromatic.js`
 
-`chromatic-generator` is ISC licensed and was created by Christian Studer (cstuder@existenz.ch).
+`chromatic-generator` is ISC licensed and was created by Christian Studer (cstuder@existenz.ch, Bureau für digitale Existenz).
 
 Source: https://github.com/cstuder/chromatic-generator
 
@@ -42,7 +44,7 @@ Once created, there are no external dependencies to worry about: All required fi
 
 It is Good Enough for my purposes: Creating a gallery from a collection of JPEG files with known-to-be-correct EXIF information.
 
-There will be no more development on my part. (Christian Studer, end of october 2015)
+There will be no more development on my part. (Christian Studer, february 2016)
 
 ### Possible improvements for the future
 
@@ -50,7 +52,7 @@ There will be no more development on my part. (Christian Studer, end of october 
 - Handling more image file types
 - Better error handling
 - Multiple galleries
-
+- Prevention of name collisions
 
 
 

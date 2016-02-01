@@ -1,5 +1,5 @@
 # chromatic-generator.py
-import glob, os, argparse, shutil, json, exifread, datetime
+import glob, os, argparse, shutil, json, exifread, datetime, unidecode
 from PIL import Image
 
 # Decode command line arguments
@@ -48,15 +48,16 @@ sourceImages = glob.glob(inputdir + '/*.jpg')
 
 for sourceImage in sourceImages:
     filename = os.path.basename(sourceImage)
+    newname = unidecode.unidecode(filename).replace(' ', '_')
 
     # Copy images
-    shutil.copy2(sourceImage, outputdir + '/images/' + filename)
+    shutil.copy2(sourceImage, outputdir + '/images/' + newname)
 
     # Create thumbnails
     image = Image.open(sourceImage)
     aspectRatio = image.width / image.height
     image.thumbnail(thumbnailsize)
-    image.save(outputdir + '/thumbnails/' + filename)
+    image.save(outputdir + '/thumbnails/' + newname)
     image.close()
 
     # Determine date
@@ -70,8 +71,8 @@ for sourceImage in sourceImages:
     # Store information and aspect ratio
 
     photoList.append({
-        'big': 'images/' + filename,
-        'small': 'thumbnails/' + filename,
+        'big': 'images/' + newname,
+        'small': 'thumbnails/' + newname,
         'aspect_ratio': aspectRatio,
         'date': date
     })
