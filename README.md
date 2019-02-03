@@ -1,19 +1,20 @@
 # chromatic-generator
+
 Status: Working
 
 A Python 3 command line tool to create beautiful static HTML photo galleries with the help of `chromatic.js`
 
 `chromatic-generator` is ISC licensed and was created by Christian Studer (cstuder@existenz.ch, Bureau für digitale Existenz).
 
-Source: https://github.com/cstuder/chromatic-generator
+Source: >https://github.com/cstuder/chromatic-generator>
 
 ## About chromatic.js
 
 A JavaScript library created by Crispy Mountain which displays beautiful photo galleries. ISC licensed.
 
-Source: https://github.com/crispymtn/chromatic.js (Copy included in this repository)
+Source: <https://github.com/crispymtn/chromatic.js> (Copy included in this repository)
 
-Hosted version: http://www.chromatic.io
+Hosted version: <http://www.chromatic.io> (No longer online)
 
 ## Top level usage
 
@@ -53,6 +54,3 @@ There will be no more development on my part. (Christian Studer, february 2016)
 - Better error handling
 - Multiple galleries
 - Prevention of name collisions
-
-
-
