@@ -6,7 +6,7 @@ A Python 3 command line tool to create beautiful static HTML photo galleries wit
 
 `chromatic-generator` is ISC licensed and was created by Christian Studer (cstuder@existenz.ch, Bureau für digitale Existenz).
 
-Source: >https://github.com/cstuder/chromatic-generator>
+Source: <https://github.com/cstuder/chromatic-generator>
 
 ## About chromatic.js
 
