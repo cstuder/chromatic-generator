@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 ExifRead = "==2.1.2"
 Unidecode = "==1.0.23"
-Pillow = "==5.4.1"
+Pillow = "==6.2.0"
 
 [dev-packages]
 
